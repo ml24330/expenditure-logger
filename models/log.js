@@ -9,6 +9,10 @@ var LogSchema = new mongoose_1.default.Schema({
         type: String,
         required: true
     },
+    userId: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true

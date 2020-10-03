@@ -13,6 +13,8 @@ import _Log from '../models/log.js';
 // For debugging
 // import _Log from './dummyData.js';
 
+const SAMPLE_ID = "1";
+
 type LogType = {
     userId: string,
     id: string,
@@ -191,7 +193,7 @@ const Mutation = new GraphQLObjectType({
                 date: {type: GraphQLString}
             },
             resolve: async (parent, args) => {
-                if(args.userId === '1'){
+                if(args.userId === SAMPLE_ID){
                     throw Error('Sample data cannot be modified!')
                 }
                 if(args.amount.toString().split('.')[1] && args.amount.toString().split('.')[1].length > 2){
@@ -220,7 +222,7 @@ const Mutation = new GraphQLObjectType({
                 id: {type: GraphQLNonNull(GraphQLString)}
             },
             resolve: async (parent, args) => {
-                if(args.userId === '1'){
+                if(args.userId === SAMPLE_ID){
                     throw Error('Sample data cannot be modified!')
                 }
                 let log = await _Log.findOneAndDelete({userId: args.userId, id: args.id}); 
@@ -242,7 +244,7 @@ const Mutation = new GraphQLObjectType({
                 date: {type: GraphQLString}
             },
             resolve: async (parent, args) => {
-                if(args.userId === '1'){
+                if(args.userId === SAMPLE_ID){
                     throw Error('Sample data cannot be modified!')
                 }
                 let log = await _Log.findOne({userId: args.userId, id: args.id}) as unknown as LogType;

@@ -53,6 +53,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var graphql_1 = require("graphql");
 var uuid_1 = require("uuid");
 var log_js_1 = __importDefault(require("../models/log.js"));
+// For debugging
+// import _Log from './dummyData.js';
+var SAMPLE_ID = "1";
 var CurrencyEnumType = new graphql_1.GraphQLEnumType({
     name: 'currencies',
     values: {
@@ -240,7 +243,7 @@ var Mutation = new graphql_1.GraphQLObjectType({
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
-                            if (args.userId === '1') {
+                            if (args.userId === SAMPLE_ID) {
                                 throw Error('Sample data cannot be modified!');
                             }
                             if (args.amount.toString().split('.')[1] && args.amount.toString().split('.')[1].length > 2) {
@@ -277,7 +280,7 @@ var Mutation = new graphql_1.GraphQLObjectType({
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
-                            if (args.userId === '1') {
+                            if (args.userId === SAMPLE_ID) {
                                 throw Error('Sample data cannot be modified!');
                             }
                             return [4 /*yield*/, log_js_1.default.findOneAndDelete({ userId: args.userId, id: args.id })];
@@ -307,7 +310,7 @@ var Mutation = new graphql_1.GraphQLObjectType({
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
-                            if (args.userId === '1') {
+                            if (args.userId === SAMPLE_ID) {
                                 throw Error('Sample data cannot be modified!');
                             }
                             return [4 /*yield*/, log_js_1.default.findOne({ userId: args.userId, id: args.id })];
