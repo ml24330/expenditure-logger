@@ -9,6 +9,7 @@ var mongoose_1 = __importDefault(require("mongoose"));
 var cors_1 = __importDefault(require("cors"));
 var path_1 = __importDefault(require("path"));
 require('dotenv').config();
+var PORT = process.env.PORT || 8000;
 var schema_1 = __importDefault(require("./graphql/schema"));
 mongoose_1.default.connect("mongodb+srv://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + "@cluster0.swmsg.mongodb.net/" + process.env.DB_NAME + "?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true });
 var db = mongoose_1.default.connection;
@@ -24,4 +25,4 @@ app.use('/graphql', express_graphql_1.graphqlHTTP({
 app.get('*', function (req, res) {
     return res.sendFile(path_1.default.resolve(__dirname, 'build', 'index.html'));
 });
-app.listen(8000, function () { return console.log('started listening'); });
+app.listen(PORT, function () { return console.log("Server started on port " + PORT); });

@@ -6,6 +6,8 @@ import path from 'path';
 
 require('dotenv').config();
 
+const PORT = process.env.PORT || 8000;
+
 import Schema from './graphql/schema';
 
 mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.swmsg.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true});
@@ -25,6 +27,8 @@ app.use('/graphql', graphqlHTTP({
 
 app.get('*', (req, res) => {
     return res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-})
+});
 
-app.listen(8000, () => console.log('started listening'));
+
+
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
