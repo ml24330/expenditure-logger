@@ -2,6 +2,7 @@ import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import path from 'path';
 
 require('dotenv').config();
 
@@ -15,10 +16,15 @@ db.on('open', () => console.log('connection established'));
 
 const app = express();
 app.use(cors());
+app.use(express.static(path.resolve(__dirname, 'build')));
 
 app.use('/graphql', graphqlHTTP({
     schema: Schema,
     graphiql: true
 }));
+
+app.get('*', (req, res) => {
+    return res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+})
 
 app.listen(8000, () => console.log('started listening'));
